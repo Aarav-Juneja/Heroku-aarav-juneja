@@ -1,0 +1,56 @@
+{
+  "name": "newsletter-signup",
+  "version": "1.0.0",
+  "description": "A page to sign for a newsletter",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aarav Juneja",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": "eslint:all",
+    "env": {
+      "node": true,
+      "browser": true,
+      "es6": true
+    },
+    "rules": {
+      "no-undef": 2,
+      "no-unused-vars": 1,
+      "no-console": 0,
+      "no-extra-semi": 2,
+      "no-var": 0,
+      "one-var": 0,
+      "strict": 0,
+      "quotes": 0,
+      "semi": 2,
+      "no-magic-numbers": 0,
+      "func-names": 0,
+      "prefer-arrow-callback": 0,
+      "indent": 0,
+      "space-before-function-paren": 0,
+      "padded-blocks": 0,
+      "no-path-concat": 0,
+      "prefer-destructuring": 0,
+      "capitalized-comments": 0,
+      "multiline-comment-style": 0,
+      "no-trailing-spaces": 0,
+      "quote-props": 0,
+      "camelcase": 0,
+      "object-curly-spacing": 0,
+      "object-curly-newline": 0,
+      "sort-keys": 0,
+      "prefer-template": 0,
+      "no-shadow": 0,
+      "no-implicit-coercion": 1,
+      "max-statements": 0,
+      "no-process-env": 0,
+      "space-before-blocks": 0
+    }
+  }
+}
