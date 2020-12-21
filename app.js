@@ -1,13 +1,23 @@
 const express = require('express');
-const https = require('https');
+const requests = require('https');
 const app = express();
 const http = express();
-http.get("*", (req, res)=>{
+const rateLimit = require("express-rate-limit");
+const {MONGO_CRED, PORT} = process.env
+http.get("*", (req, res) => {
   res.redirect('https://' + req.headers.host + req.url);
 })
 http.listen(80);
+
+app.use(rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100
+}))
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
+app.set("trust proxy");
 
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/signup.html");
@@ -33,9 +43,9 @@ app.post("/", function(req, res) {
   const url = "https://us17.api.mailchimp.com/3.0/lists/8bd2d58897";
   const options = {
     method: "POST",
-    auth: "AaravJ:4c56ee502fe2b5f8c25b55fe09fa3224-us17"
+    auth: MONGO_CRED
   };
-  const request = https.request(url, options, function(response) {
+  const request = requests.request(url, options, function(response) {
     if (response.statusCode === 200) {
       res.sendFile(__dirname + "/success.html");
     } else {
@@ -53,8 +63,6 @@ app.get("/failure", function(req, res){
   res.redirect("/");
 });
 
-app.get("/todolist", )
-
-app.listen(process.env.PORT || 3000, function() {
-  console.log("Node sever listening on port 3000!");
+app.listen(PORT || 3000, function() {
+  console.log(`Node sever listening on port ${PORT || 3000}!`);
 });
