@@ -1,22 +1,24 @@
 const express = require('express');
 const requests = require('https');
 const app = express();
-const http = express();
 const rateLimit = require("express-rate-limit");
-const {MONGO_CRED, PORT} = process.env
-http.get("*", (req, res) => {
-  res.redirect('https://' + req.headers.host + req.url);
-})
-http.listen(80);
-
+const { MONGO_CRED, PORT } = process.env
+// no DoS/DDoS shutdown
 app.use(rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100
 }))
+// HTTPS only
+app.use((req, res, next) => {
+  if (req.secure) {
+    return next()
+  }
+  return res.redirect("https://" + req.hostname + req.url);
+})
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
-
+// Heroku doesn't lie
 app.set("trust proxy");
 
 app.get("/", function(req, res) {
@@ -59,7 +61,7 @@ app.post("/", function(req, res) {
   request.end();
 });
 
-app.get("/failure", function(req, res){
+app.get("/failure", function(req, res) {
   res.redirect("/");
 });
 
