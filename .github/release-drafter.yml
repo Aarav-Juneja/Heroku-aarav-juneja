@@ -1,0 +1,31 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+categories:
+  - title: 'New feature'
+    label: 'enhancement'
+  - title: 'README update'
+    label: 'documentation'
+  - title: 'Bug fixes'
+    label: 'bug'
+  - title: 'Dependencies'
+    label: 'dependencies'
+version-resolver:
+  major:
+    labels:
+      - 'big change'
+  minor:
+    labels:
+      - 'enhancement'
+  patch:
+    labels: 
+      - 'dependencies'
+      - 'bug'
+      - 'documentation'
+template: |
+  # Changes
+  
+  $CHANGES
+exclude-labels:
+  - 'wontfix'
+  - 'duplicate'
+  - 'side'
