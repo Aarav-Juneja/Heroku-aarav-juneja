@@ -6,8 +6,10 @@ http.get("*", (req, res)=>{
   res.redirect('https://' + req.headers.host + req.url);
 })
 http.listen(80);
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.set("view engine", "ejs")
 
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/signup.html");
