@@ -3,6 +3,9 @@ const requests = require('https');
 const app = express();
 const rateLimit = require("express-rate-limit");
 const { MONGO_CRED, PORT } = process.env
+
+// Heroku doesn't lie
+app.set("trust proxy");
 // no DoS/DDoS shutdown
 app.use(rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -18,8 +21,6 @@ app.use((req, res, next) => {
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
-// Heroku doesn't lie
-app.set("trust proxy");
 
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/signup.html");
