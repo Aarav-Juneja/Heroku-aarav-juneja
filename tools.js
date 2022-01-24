@@ -47,6 +47,7 @@ function headers(req, res, next) {
 /**
   @function security
   @param {Object} app Express app
+  @param {Boolean} https Enable https security or not
   @returns {Function} Middleware func
 */
 function security(app, https) {
