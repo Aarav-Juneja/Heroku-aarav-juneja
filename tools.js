@@ -18,7 +18,7 @@ function https(req, res, next) {
   if (req.secure) {
     return next()
   }
-  console.log(req)
+  // console.log(req)
   return res.redirect("https://" + req.hostname + req.url);
 }
 
@@ -37,7 +37,7 @@ function headers(req, res, next) {
       // Main form
       "form-action 'self'; " +
       // https
-      "upgrade-insecure-requests; " +
+      // "upgrade-insecure-requests; " +
       // bootstrap and local
       "default-src 'self' stackpath.bootstrapcdn.com"
   })
@@ -49,7 +49,7 @@ function headers(req, res, next) {
   @param {Object} app Express app
   @returns {Function} Middleware func
 */
-function security(app) {
+function security(app, https) {
   // no DoS/DDoS shutdown
   app.use(rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -61,7 +61,8 @@ function security(app) {
   app.use(headers)
 
   // HTTPS only
-  app.use(https)
+  // Keep the site up
+  https ? app.use(https)
 }
 
 /**
@@ -82,9 +83,10 @@ function config(app) {
 exports.security = security;
 exports.https = https;
 // eslint-disable-next-line no-multi-assign
-exports = module.exports = app => {
+exports = module.exports = (app, https=true) => {
   config(app)
-  security(app)
+  security(app, https)
 }
 
 exports.config = config;
+exports.security = security;
