@@ -2,14 +2,15 @@
   "name": "newsletter-signup",
   "version": "1.0.0",
   "description": "A page to sign for a newsletter",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --detectOpenHandles"
   },
   "author": "Aarav Juneja",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "supertest": "^6.0.1"
   },
   "eslintConfig": {
     "root": true,
@@ -28,7 +29,7 @@
       "one-var": 0,
       "strict": 0,
       "quotes": 0,
-      "semi": 2,
+      "semi": 0,
       "no-magic-numbers": 0,
       "func-names": 0,
       "prefer-arrow-callback": 0,
@@ -52,5 +53,8 @@
       "no-process-env": 0,
       "space-before-blocks": 0
     }
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
   }
 }
