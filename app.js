@@ -2,10 +2,10 @@ const express = require('express');
 const https = require('https');
 const app = express();
 const http = express();
-http.get("*", (req, res)=>{
+http.get("*", (req, res) => {
   res.redirect('https://' + req.headers.host + req.url);
 })
-http.listen(80);
+// The http won't be running anymore
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
@@ -49,11 +49,11 @@ app.post("/", function(req, res) {
   request.end();
 });
 
-app.get("/failure", function(req, res){
+app.get("/failure", function(req, res) {
   res.redirect("/");
 });
 
-app.get("/todolist", )
+// app.get("/todolist", )
 
 app.listen(process.env.PORT || 3000, function() {
   console.log("Node sever listening on port 3000!");
